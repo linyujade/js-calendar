@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>Test Date</title>
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.20.0.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css" >
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/qunit-1.20.0.js"></script>
+    <script src="js/calendar.js"></script>
+</head>
+
+<body>
+    <div id="qunit"></div>
+    没指定有效日期范围：
+    <div id="testDiv1">
+        <input id="txtDate1" type="text" class="date-picker">
+    </div>
+    指定最小日期为2016/01/01
+    <div id="testDiv2">
+        <input id="txtDate2" type="text" class="date-picker">
+    </div>
+
+    指定最大日期为2016/12/31
+    <div id="testDiv3">
+        <input id="txtDate3" type="text" class="date-picker">
+    </div>
+    <script>
+    $.calendar.init({lang: 'zh-CN'});
+    $('#testDiv1').calendar();
+
+    QUnit.test("测试输入的日期是否有效", function(assert) {
+        assert.equal($.calendar.isValidDate('abcdefghijk'), false, 'abcdefghijk, 该字符串是无效日期');
+        assert.equal($.calendar.isValidDate('abcd-12-10'), false, 'abcd-12-10, 该字符串是无效日期');
+        assert.equal($.calendar.isValidDate('0000-12-10'), false, '0000-12-10, 该字符串是无效日期');
+        assert.equal($.calendar.isValidDate('3333-13-32'), false, '3333-13-32, 该字符串是无效日期');
+        assert.equal($.calendar.isValidDate('3333-0-10'), false, '3333-0-10, 该字符串是无效日期');
+        assert.equal($.calendar.isValidDate('3333-12-32'), false, '3333-12-32, 该字符串是无效日期');
+        assert.equal($.calendar.isValidDate('3333-12-0'), false, '3333-12-0, 该字符串是无效日期');
+    });
+
+    QUnit.test("测试有31号的月份", function(assert) {
+        var months = [1, 3, 5, 7, 8, 10, 12];
+        var year = 2017; // 平年
+        for (var i = 0, len = months.length; i < len; i++) {
+            var str = year + '-' + months[i] + '-' + '31';
+            assert.equal($.calendar.isValidDate(str), true, str + ', 有31号');
+        }
+        year = 2020; // 闰年
+        for (var i = 0, len = months.length; i < len; i++) {
+            var str = year + '-' + months[i] + '-' + '31';
+            assert.equal($.calendar.isValidDate(str), true, str + ', 有31号');
+        }
+    });
+
+    QUnit.test("测试没有31号的月份", function(assert) {
+        var months = [2, 4, 6, 9, 11];
+        var year = 2017; // 平年
+        for (var i = 0, len = months.length; i < len; i++) {
+            var str = year + '-' + months[i] + '-' + '31';
+            assert.equal($.calendar.isValidDate(str), false, str + ', 没有31号');
+        }
+        year = 2020; // 闰年
+        for (var i = 0, len = months.length; i < len; i++) {
+            var str = year + '-' + months[i] + '-' + '31';
+            assert.equal($.calendar.isValidDate(str), false, str + ', 没有31号');
+        }
+    });
+    QUnit.test("测试有30号的月份", function(assert) {
+        var months = [4, 6, 9, 11];
+        var year = 2017; // 平年
+        for (var i = 0, len = months.length; i < len; i++) {
+            var str = year + '-' + months[i] + '-' + '30';
+            assert.equal($.calendar.isValidDate(str), true, str + ', 有30号');
+        }
+        year = 2020; // 闰年
+        for (var i = 0, len = months.length; i < len; i++) {
+            var str = year + '-' + months[i] + '-' + '30';
+            assert.equal($.calendar.isValidDate(str), true, str + ', 有30号');
+        }
+    });
+    QUnit.test("测试2月份有29号的情况", function(assert) {
+        $('#txtDate1').focus();
+        var years = [2020, 2024, 2036, 2052, 2000];
+        for (var i = 0, len = years.length; i < len; i++) {
+            var str = years[i] + '-02-' + '29';
+            assert.equal($.calendar.isValidDate(str), true, str + ', 有29号');
+        }
+        $('#txtDate1').blur();
+    });
+    QUnit.test("测试2月份没有29号的情况", function(assert) {
+        var years = [2017, 2025, 2037, 2039, 2050];
+        for (var i = 0, len = years.length; i < len; i++) {
+            var str = years[i] + '-02-' + '29';
+            assert.equal($.calendar.isValidDate(str), false, str + ', 没有29号');
+        }
+        for (var i = 0, len = years.length; i < len; i++) {
+            var str = years[i] + '-02-' + '28';
+            assert.equal($.calendar.isValidDate(str), true, str + ', 有28号');
+        }
+    });
+
+    QUnit.test("根据业务需要，设置可选的最小日期为2016/01/01", function(assert) {
+        $('#testDiv2').calendar({minDate: '2016/01/01'});
+        $('#txtDate2').focus();
+        assert.equal($.calendar.isValidDate('2015/12/31'), false, '2015/12/31, 小于最小可选日期2016/01/01');
+        assert.equal($.calendar.isValidDate('2016/01/01'), true, '2016/01/01, 等于最小可选日期2016/01/01');
+        assert.equal($.calendar.isValidDate('2017/01/01'), true, '2017/01/01, 大于最小可选日期2016/01/01');
+        $('#txtDate2').blur();
+    });
+    QUnit.test("根据业务需要，设置可选的最大日期为2016/12/31", function(assert) {
+        $('#testDiv3').calendar({maxDate: '2016/12/31'});
+        $('#txtDate3').focus();
+        assert.equal($.calendar.isValidDate('2015/12/31'), true, '2015/12/31, 小于最大可选日期2016/12/31');
+        assert.equal($.calendar.isValidDate('2016/12/31'), true, '2016/12/31, 等于最大可选日期2016/12/31');
+        assert.equal($.calendar.isValidDate('2017/01/01'), false, '2017/01/01, 大于最大可选日期2016/12/31');
+        $(document).click();
+    });
+    </script>
+</body>
+
+</html>

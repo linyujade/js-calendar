@@ -1,0 +1,272 @@
+body {
+    font-size: 14px;
+}
+ul {
+    list-style: none;
+}
+.container {
+    margin: 0 auto;
+    width: 980px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.custom-panel {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 15px;
+    padding: 10px;
+    text-align: left;
+    width: 600px;
+}
+
+
+/**
+ * custom-radio, custom-check-box
+ */
+
+.custom-radio ul li {
+    background: url(../img/radio.png) no-repeat 0 -25px;
+    padding-left: 24px;
+}
+
+.custom-check-box ul li {
+    background: url(../img/checkbox.png) no-repeat -3px -42px;
+    padding-left: 28px;
+}
+
+.custom-radio ul li,
+.custom-check-box ul li {
+    cursor: pointer;
+    display: inline-block;
+    *float: left;
+    line-height: 1.5;
+    list-style-type: none;
+    margin-left: 15px;
+    *margin-left: 20px;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.custom-radio ul .on {
+    background-position: 0 2px;
+}
+
+.custom-check-box ul .on {
+    background-position: -3px -7px;
+}
+
+.custom-radio ul,
+.custom-check-box ul {
+    *zoom: 1;
+}
+
+
+/**
+ * rotater
+ */
+
+.rotate-container {
+    margin-top: 20px;
+    width: 816px;
+}
+
+.rotate-oper {
+    text-align: center;
+}
+
+.rotate-oper a {
+    background-color: #1495ef;
+    border-radius: 3px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.rotate-oper .rotate-left,
+.rotate-oper .rotate-right {
+    background-image: url(../img/rotater.png);
+    background-repeat: no-repeat;
+    padding: 10px 10px 10px 50px;
+}
+
+.rotate-oper .rotate-left {
+    background-position: -6px -6px;
+}
+
+.rotate-oper .rotate-right {
+    background-position: -6px -49px;
+}
+
+.rotate-container ul li {
+    border: 1px solid #ccc;
+    display: none;
+    list-style-type: none;
+    margin-top: 20px;
+    padding: 1px;
+}
+
+.rotate-container ul .on {
+    display: block;
+}
+
+
+/**
+ * calendar
+ */
+
+.cal-container {
+    background-color: #1495ef;
+    border: 1px solid #b5b5b5;
+    display: none;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 5px 0 0 0;
+    position: absolute;
+    width: 372px;
+    z-index: 3;
+}
+
+.cal-top-bar {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.cal-top-bar .cal-title {
+    background-color: #1495ef;
+    color: #fff;
+    float: left;
+    width: 145px;
+}
+
+.cal-title .txt-year,
+.cal-title .txt-month {
+    display: none;
+    text-align: center;
+    width: 50px;
+}
+
+.year-list,
+.month-list {
+    border: 1px solid #e1e1e1;
+    background: #f1faff;
+    color: #111;
+    cursor: default;
+    display: none;
+    font-weight: 400;
+    position: absolute;
+    padding: 8px 0;
+}
+
+.month-list {
+    width: 60px;
+}
+
+.year-list {
+    width: 100px;
+}
+
+.month-list li,
+.year-list li {
+    display: list-item;
+    float: left;
+    padding: 3px 5px;
+}
+.month-list li {
+    width: 20px;
+}
+.year-list li {
+    width: 40px;
+}
+
+.year-list .highlight,
+.month-list .highlight {
+    color: #e8322f;
+    font-weight: 700;
+}
+
+.cal-title .lbl-year,
+.cal-title .lbl-month {
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 15px;
+}
+
+.cal-top-bar .prev-year,
+.cal-top-bar .next-year,
+.cal-top-bar .prev-month {
+    background-color: #1495ef;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    width: 20px;
+}
+
+.cal-top-bar .next-month {
+    background-color: #1495ef;
+    color: #fff;
+    cursor: pointer;
+    float: right;
+    width: 20px;
+}
+
+.cal-week {
+    border-top: 1px solid #b5b5b5;
+}
+
+.cal-week .holiday {
+    color: #a40b12;
+}
+
+.cal-week span {
+    margin: 1.02em;
+    *margin: .85em;
+}
+
+.cal-row,
+.cal-week {
+    background-color: #fff;
+    line-height: 2;
+}
+
+.cal-cell {
+    margin: .32em;
+    *margin: .35em;
+    padding: 3px 12px;
+}
+
+.cal-cell.on {
+    border: 1px solid #3385ff;
+}
+
+.cal-cell.holiday {
+    color: #a40b12;
+}
+
+.cal-cell.highlight {
+    background: #3385ff;
+    color: #fff;
+    font-family: 700;
+}
+
+.cal-cell.data {
+    cursor: pointer;
+}
+
+.cal-cell.data.disabled {
+    color: #999;
+    cursor: text;
+}
+
+.date-picker {
+    background: url(../img/datepicker.png) no-repeat right center;
+    border: 1px solid #dadada;
+    line-height: 2;
+    outline: none;
+    padding-left: 6px;
+    width: 362px;
+    height: 28px;
+}

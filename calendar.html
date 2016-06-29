@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" >
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/custom.css" >
+</head>
+
+<body>
+    <div class="container">
+        <div id="panel1" class="custom-panel">
+            <p>日期控件的使用, 没有指定日期可选范围：</p>
+            <input type="text" class="date-picker" id="txtDate1" ="date" value="">
+        </div>
+        <div id="panel2" class="custom-panel">
+            <p>日期控件的使用, 指定最小可选日期（2016/01/01）：</p>
+            <input type="text" class="date-picker" id="txtDate2" value="">
+        </div>
+        <div id="panel3" class="custom-panel">
+            <p>日期控件的使用, 指定最大可选日期（2010/12/31）：</p>
+            <input type="text" class="date-picker" id="txtDate3" value="">
+        </div>
+        <div id="panel4" class="custom-panel">
+            <p>日期控件的使用, 指定可选范围为（2010/01/01～2016/12/31）</p>
+            <input type="text" class="date-picker" id="txtDate4" value="">
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/calendar.js"></script>
+<script type="text/javascript">
+$(function () {
+    $.calendar.init({lang: 'zh-CN'});
+    $('#panel1').calendar();
+    $('#panel2').calendar({minDate: '2016/01/01'});
+    $('#panel3').calendar({maxDate: '2010/12/31'});
+    $('#panel4').calendar({minDate: '2010/01/01', maxDate: '2016/12/31'});
+});
+</script>
+</html>
